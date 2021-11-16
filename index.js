@@ -6,10 +6,24 @@ app.set('view engine','ejs');
 
 //creando conexion a base de datos 
 const Sequelize = require('sequelize');
+/*
 const sequelize = new Sequelize({
     dialect:'sqlite',
     storage:'./database.sqlite'
-})
+})*/
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  }
+}
+);
+
+
+
+
 sequelize.authenticate()
 .then(()=>{
     console.log("conexion establecida");
@@ -61,7 +75,7 @@ app.get('/', (req, res) => {
   
 })
 
-app.use(express.static('static'))
+app.use(express.static('https://francishuamannahui.github.io/repopp/static/'))
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
