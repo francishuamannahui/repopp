@@ -1,0 +1,5 @@
+1,- crear proyecto npm d
+npm init - y
+2- instalar dependencias
+npm install express
+npm install nodemon -D
